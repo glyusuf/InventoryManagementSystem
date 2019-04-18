@@ -13,7 +13,7 @@ isUserLoggedIn :boolean = false;
   ) { }
 
   ngOnInit() {
-    this.isUserLoggedIn = this.hardcodedAuthenticationService.isUserLoggedIn();
+    //this.isUserLoggedIn = this.hardcodedAuthenticationService.isUserLoggedIn();
   }
 
 }

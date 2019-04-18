@@ -10,18 +10,21 @@ import { StockComponent } from './stock/stock.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
+import { RouteGuardService } from './service/route-guard.service';
+import { ExpensePageComponent } from './expense-page/expense-page.component';
 
 const routes: Routes = [
   { path:'', component:LoginComponent },
   { path:'login', component:LoginComponent },
   { path:'logout', component:LogoutComponent },
-  { path:'welcome/:name', component:WelcomeComponent },
-  { path:'menu', component:MenuComponent },
-  { path:'footer', component:FooterComponent },
-  { path:'ledger', component:LedgerComponent },
-  { path:'expense', component:ExpenseComponent },
-  { path:'category', component:CategoryComponent },
-  { path:'stock', component:StockComponent },
+  { path:'welcome/:name', component:WelcomeComponent, canActivate:[RouteGuardService]},
+  { path:'menu', component:MenuComponent, canActivate:[RouteGuardService] },
+  { path:'footer', component:FooterComponent , canActivate:[RouteGuardService]},
+  { path:'ledger', component:LedgerComponent, canActivate:[RouteGuardService] },
+  { path:'expense', component:ExpenseComponent, canActivate:[RouteGuardService] },
+  { path:'category', component:CategoryComponent , canActivate:[RouteGuardService]},
+  { path:'stock', component:StockComponent , canActivate:[RouteGuardService]},
+  { path:'expense/:id', component:ExpensePageComponent , canActivate:[RouteGuardService]},
   { path:'**', component:ErrorComponent },
 ];
 

@@ -14,6 +14,8 @@ import { CategoryComponent } from './category/category.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ExpensePageComponent } from './expense-page/expense-page.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +29,14 @@ import { ErrorComponent } from './error/error.component';
     CategoryComponent,
     MenuComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    ExpensePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

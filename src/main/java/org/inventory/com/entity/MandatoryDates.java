@@ -19,7 +19,7 @@ public class MandatoryDates {
 	@Column(name = "MODIFIED_DATE", nullable = false)
 	private Date modifiedDate;
 
-	@Column(name = "UPDATED_BY", nullable = false)
+	@Column(name = "UPDATED_BY")
 	private String updatedby;
 
 	public MandatoryDates() {

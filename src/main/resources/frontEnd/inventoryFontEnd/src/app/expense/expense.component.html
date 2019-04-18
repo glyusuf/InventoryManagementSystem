@@ -1,24 +1,34 @@
 <h1> Expense Page</h1>
-
-<div class="container"> 
-<table class="table">
-   
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Description</th>
-      <th>Amount</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let expense of expenses"> 
-      <td>{{expense.id}}</td>
-      <td>{{expense.expenseDescription}}</td>
-      <td>{{expense.expenseAmount}}</td>
-      <td>{{expense.expenseDate | date}}</td>
-    </tr>
-
-  </tbody>
-</table>
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="row">
+    <button (click)="addExpense()" class="btn btn-success">Add new</button>
+</div>
+<div class="container">
+  <table class="table"> 
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of expenseList">
+        <td>{{expense.id}}</td>
+        <td>{{expense.expenseDescription}}</td>
+        <td>{{expense.expenseAmount}}</td>
+        <td>{{expense.expenseDate | date}}</td>
+        <td><button (click)="editExpense(expense.id)" class="btn btn-success">Edit</button></td>
+        <td><button (click)="deleteExpense(expense.id)" class="btn btn-warning">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <ul class="nav nav-pills">
+    <li class="nav-item" *ngFor="let p of pages; let i=index">
+        <a class="nav-link active" href="" (click)='setPage(i,$event)'>{{i}}</a>
+    </li>
+  </ul>
 </div>

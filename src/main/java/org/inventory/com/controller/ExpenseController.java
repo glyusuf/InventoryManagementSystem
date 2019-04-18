@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.inventory.com.entity.Expense;
+import org.inventory.com.entity.Ledger;
 import org.inventory.com.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -90,6 +91,7 @@ public class ExpenseController {
 
 	@PostMapping("/save-expenses")
 	public ResponseEntity<Void> createExpense(@RequestBody Expense expense){
+		expense.setUpdatedby("yusuf");
 		Expense expenseCreated =  expenseRepository.save(expense);
 		URI uri=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(expenseCreated.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -97,6 +99,7 @@ public class ExpenseController {
 	
 	@PutMapping("/edit-expenses/{id}")
 	public ResponseEntity<Expense> editExpense(@PathVariable long id, @RequestBody Expense expense){
+		System.out.println("expnese des"+expense.getUpdatedby());
 		Expense expenseUpdated = expenseRepository.save(expense);
 		return new ResponseEntity<Expense>(expense, HttpStatus.OK);
 	}
