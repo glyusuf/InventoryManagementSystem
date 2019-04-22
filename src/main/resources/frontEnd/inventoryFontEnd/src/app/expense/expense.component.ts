@@ -32,7 +32,7 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit() {
     //this.refreshExpensePage(); 
-    this.getExpenseList(this.page);
+    this.getExpenseList();
   }
 
   refreshExpensePage(){
