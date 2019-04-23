@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpensePageComponent } from './expense-page/expense-page.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ExpensePageComponent } from './expense-page/expense-page.component';
     MenuComponent,
     FooterComponent,
     ErrorComponent,
-    ExpensePageComponent
+    ExpensePageComponent,
+    CategoryPageComponent
   ],
   imports: [
     BrowserModule,

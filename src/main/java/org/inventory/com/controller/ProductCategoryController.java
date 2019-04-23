@@ -40,6 +40,7 @@ public class ProductCategoryController {
 
 	@PostMapping("/save-category")
 	public ResponseEntity<Void> createStock(@RequestBody ProductCategory category) {
+		category.setUpdatedby("yusuf");
 		ProductCategory categoryCreated = productCategoryRepository.save(category);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoryCreated.getId())
 				.toUri();

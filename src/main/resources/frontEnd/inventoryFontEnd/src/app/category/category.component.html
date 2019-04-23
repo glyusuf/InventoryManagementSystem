@@ -1,3 +1,23 @@
-<p>
-  category works!
-</p>
+<h1> Category</h1>
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<button (click)="addCategory()" class="btn btn-success">Add new</button> &nbsp;&nbsp;&nbsp;
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>categoryName</th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categoryList">
+        <td>{{category.id}}</td>
+        <td>{{category.categoryName}}</td>
+        <td><button (click)="editCategory(category.id)" class="btn btn-success">Edit</button></td>
+        <td><button (click)="deleteCategory(category.id)" class="btn btn-warning">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -33,8 +33,7 @@ export class ExpensePageComponent implements OnInit {
     this.expense.updatedBy = sessionStorage.getItem('authenticatedUser');
     this.expense.modifiedDate = new Date();
     
-    if (this.id != -1) {
-      console.log("37 ID IS "+this.id );
+    if (this.id != -1) { 
       this.expeseDateSevice.editExpenseService(this.id, this.expense).subscribe(
         response => {
           console.log(response)
@@ -42,12 +41,9 @@ export class ExpensePageComponent implements OnInit {
         }
       );
      
-    } else {
-      console.log("47 ID IS "+this.id );
+    } else { 
       this.expense.createdBy = sessionStorage.getItem('authenticatedUser');
-      this.expense.createdDate = new Date();
- 
-      console.log(this.expense.updatedBy);
+      this.expense.createdDate = new Date(); 
       
       this.expeseDateSevice.createExpenseService(this.expense).subscribe(
         response => {

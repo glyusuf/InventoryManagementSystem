@@ -1,0 +1,13 @@
+<h1>Category</h1>
+<div class="container">
+  <fieldset class="form-group">
+    <label>CategoryName</label>
+    <input type="text" [(ngModel)]="category.categoryName" class="form-control" name="categoryName"
+      required="required">
+  </fieldset>
+  <input type="hidden" [(ngModel)]="category.createdBy" class="form-control" name="createdBy" required="required">
+  <input type="hidden" [(ngModel)]="category.createdDate" class="form-control" name="createdDate" required="required">
+  <input type="hidden" [(ngModel)]="category.modifiedDate" class="form-control" name="modifiedDate" required="required">
+  <input type="hidden" [(ngModel)]="category.updatedby" class="form-control" name="updatedby" required="required">
+  <button class="btn btn-success" (click)="saveCategory()">Save</button>
+</div>

@@ -31,7 +31,7 @@ public class Ledger extends MandatoryDates{
 
     @Column(name = "PAYMENT_TYPE", nullable = false)
    	private String paymentType;
-
+    
     @Column(name = "FOLIO", nullable = false)
 	private String folio;
 

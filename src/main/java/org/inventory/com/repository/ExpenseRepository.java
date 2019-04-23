@@ -1,5 +1,6 @@
 package org.inventory.com.repository;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,4 +24,13 @@ public interface ExpenseRepository extends PagingAndSortingRepository<Expense, I
     @Query(value = "select * from expense e where e.expense_date between ?1 and ?2",nativeQuery = true) 
     Page<Expense> findAllWithinDatesPagination(@Param("expense_date") Date strDateTime, @Param("expense_date") Date endDateTime, Pageable pageable);
 
+	/*
+	 * @Query(value =
+	 * "select SUM(EXPENSE_AMOUNT) from expense e where e.expense_date between ?1 and ?2"
+	 * ,nativeQuery = true) Double CalculateAllWithinDates(@Param("expense_date")
+	 * Date strDateTime, @Param("expense_date") Date endDateTime);
+	 */
+    @Query(value = "select SUM(EXPENSE_AMOUNT) from expense e where e.expense_date between ?1 and ?2",nativeQuery = true) 
+    BigDecimal CalculateAllWithinDates(@Param("expense_date") Date strDateTime, @Param("expense_date") Date endDateTime);
+    
 }

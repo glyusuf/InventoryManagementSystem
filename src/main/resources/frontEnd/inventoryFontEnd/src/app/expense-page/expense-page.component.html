@@ -15,10 +15,9 @@
         (ngModelChange)="expense.expenseDate = $event"
         name="expenseDate" class="form-control" required="required">
   </fieldset>
-  <input type="hidden" [(ngModel)]="expense.createdBy"  class="form-control" name="createdBy" required="required">
-  <input type="hidden" [(ngModel)]="expense.createdDate"  class="form-control" name="createdDate" required="required">
-  <input type="hidden" [(ngModel)]="expense.modifiedDate"  class="form-control" name="modifiedDate" required="required">
-  <input type="hidden" [(ngModel)]="expense.updatedby"  class="form-control" name="updatedby" required="required">
-  
+  <input type="hidden" [(ngModel)]="expense.createdBy" class="form-control" name="createdBy" required="required">
+  <input type="hidden" [(ngModel)]="expense.createdDate" class="form-control" name="createdDate" required="required">
+  <input type="hidden" [(ngModel)]="expense.modifiedDate" class="form-control" name="modifiedDate" required="required">
+  <input type="hidden" [(ngModel)]="expense.updatedby" class="form-control" name="updatedby" required="required">
   <button class="btn btn-success" (click)="saveExpense()">Save</button>
 </div>

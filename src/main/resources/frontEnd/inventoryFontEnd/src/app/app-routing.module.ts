@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ErrorComponent } from './error/error.component';
 import { RouteGuardService } from './service/route-guard.service';
 import { ExpensePageComponent } from './expense-page/expense-page.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
 
 const routes: Routes = [
   { path:'', component:LoginComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path:'category', component:CategoryComponent , canActivate:[RouteGuardService]},
   { path:'stock', component:StockComponent , canActivate:[RouteGuardService]},
   { path:'expense/:id', component:ExpensePageComponent , canActivate:[RouteGuardService]},
+  { path:'category/:id', component:CategoryPageComponent , canActivate:[RouteGuardService]},
   { path:'**', component:ErrorComponent },
 ];
 

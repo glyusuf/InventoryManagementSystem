@@ -17,18 +17,7 @@ export class ExpenseDataService {
     return this.http.get<Expense[]>(`http://localhost:8080/walton/expenses`);
   }
    
-  retriveAllExpensesByDate(page:number){
-    let date = new Date();
-    let strDate = new Date(date.getFullYear(), date.getMonth(), 1);
-    let endDate = new Date(date.getFullYear(), date.getMonth()+1, 0);
-    const  format = 'dd-MM-yyyy'; 
-    const locale = 'en-US';
-    const formattedStrDate = formatDate(strDate, format, locale);
-    const formattedEndDate = formatDate(endDate, format, locale);
-
-     
-    console.log("DATE "+formattedStrDate );
-    console.log("END DATE "+formattedEndDate);
+  retriveAllExpensesByDate(page:number, formattedStrDate:string, formattedEndDate:string){
     return this.http.get<Expense[]>(this.baseUrl+'/expensesbydate/get?page='+page+'&size=2&strDate='+formattedStrDate+'&endDate='+formattedEndDate)
   }
 
@@ -49,5 +38,9 @@ export class ExpenseDataService {
   createExpenseService(expense){ 
     console.log("Create PAGE");
     return this.http.post('http://localhost:8080/walton/save-expenses', expense);
+  }
+
+  calculateExpanceWithInDates(formattedStrDate:string, formattedEndDate:string){
+    return this.http.get<number>(this.baseUrl+'/calculateexpensesbydate/get?strDate='+formattedStrDate+'&endDate='+formattedEndDate)
   }
 }

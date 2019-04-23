@@ -1,5 +1,6 @@
 package org.inventory.com.controller;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -81,6 +82,7 @@ public class ExpenseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Page<Expense> resultPage = expenseRepository.findAllWithinDatesPagination(strDateTime, endDateTime, PageRequest.of(page, size));
 		if (page > resultPage.getTotalPages()) {
 			System.out.println("Resource Not Found");
@@ -110,4 +112,23 @@ public class ExpenseController {
 	       expenseRepository.delete(expense);
 	       
 	   }
+	
+	@RequestMapping(value = "/calculateexpensesbydate/get", params = {"strDate",
+	"endDate" }, method = RequestMethod.GET)
+	public BigDecimal CalculateAllWithinDatesPagination(@RequestParam String strDate, @RequestParam String endDate) {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+ 
+		Date strDateTime = new Date();
+		Date endDateTime = new Date();
+		try {
+			strDateTime = format.parse(strDate);
+			endDateTime = format.parse(endDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		 	
+		BigDecimal total = expenseRepository.CalculateAllWithinDates(strDateTime, endDateTime);
+		 
+		return total;
+	}
 }
