@@ -17,6 +17,9 @@ import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpensePageComponent } from './expense-page/expense-page.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
+import { StockPageComponent } from './stock-page/stock-page.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,13 +35,16 @@ import { CategoryPageComponent } from './category-page/category-page.component';
     FooterComponent,
     ErrorComponent,
     ExpensePageComponent,
-    CategoryPageComponent
+    CategoryPageComponent,
+    StockPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,9 +3,14 @@ package org.inventory.com.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.inventory.com.entity.Expense;
+import org.inventory.com.entity.ProductCategory;
 import org.inventory.com.entity.Stock;
+import org.inventory.com.repository.ProductCategoryRepository;
 import org.inventory.com.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -26,11 +32,25 @@ public class StockController {
 	@Autowired
 	private StockRepository stockRepository;
 
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
+	
 	@GetMapping("/stocks")
 	public List<Stock> getAllStocks() {
 		return (List<Stock>) stockRepository.findAll();
 	}
-
+	
+	@GetMapping("/allstocks")
+	public Page<Stock> findAllStocksPagination(@RequestParam("page") int page, @RequestParam("size") int size) {
+		
+		Page<Stock> resultPage = stockRepository.findAllStocksPagination(PageRequest.of(page, size));
+		if (page > resultPage.getTotalPages()) {
+			System.out.println("Resource Not Found");
+		}
+		
+		return resultPage;
+	}
+	
 	@GetMapping("/stocks/{id}")
 	public Stock getstock(@PathVariable Long id) {
 		return stockRepository.findById(id);
@@ -38,14 +58,16 @@ public class StockController {
 
 	@PostMapping("/save-stocks")
 	public ResponseEntity<Void> createStock(@RequestBody Stock stock) {
+		System.out.println("=========save stock called "+stock.getProductCategory());
 		Stock stockCreated = stockRepository.save(stock);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(stockCreated.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 	}
-
+ 
 	@PutMapping("/edit-stock/{id}")
 	public ResponseEntity<Stock> editStock(@PathVariable long id, @RequestBody Stock stock) {
+		System.out.println("====>> "+stock.getProductCategory());
 		Stock stockUpdated = stockRepository.save(stock);
 		return new ResponseEntity<Stock>(stock, HttpStatus.OK);
 	}
@@ -54,6 +76,5 @@ public class StockController {
 	public void deleteStock(@PathVariable(value = "id") Long id) throws Exception {
 		Stock stock = stockRepository.findById(id);
 		stockRepository.delete(stock);
-
 	}
 }

@@ -1,0 +1,33 @@
+<h1>Stock</h1>
+<div class="container">
+  <fieldset class="form-group">
+    <label>Product Name</label>
+    <input type="text" [(ngModel)]="stock.productName" class="form-control" name="productName" required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Product Category</label>
+       <select class="custom-select" [(ngModel)]="selectedName"> 
+          <option *ngFor="let c of categoryList" [ngValue]="c.categoryName">{{c.categoryName}}</option>
+       </select>
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Quantity</label>
+    <input type="text" [(ngModel)]="stock.quantity"  class="form-control" name="quantity" required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Price Per Unit</label>
+    <input type="text" [(ngModel)]="stock.pricePerUnit"  class="form-control" name="pricePerUnit" required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Date</label>
+    <input type="date" 
+        [ngModel]="stock.modifiedDate | date:'yyyy-MM-dd'" 
+        (ngModelChange)="stock.modifiedDate = $event"
+        name="modifiedDate" class="form-control" >
+  </fieldset>
+  <input type="hidden" [(ngModel)]="stock.createdBy" class="form-control" name="createdBy" required="required">
+  <input type="hidden" [(ngModel)]="stock.createdDate" class="form-control" name="createdDate" required="required">
+  <input type="hidden" [(ngModel)]="stock.modifiedDate" class="form-control" name="modifiedDate" required="required">
+  <input type="hidden" [(ngModel)]="stock.updatedby" class="form-control" name="updatedby" required="required">
+  <button class="btn btn-success" (click)="saveStock()">Save</button>
+</div> 
