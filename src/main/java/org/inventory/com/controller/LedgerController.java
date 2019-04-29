@@ -85,6 +85,7 @@ public class LedgerController {
 
 	@PostMapping("/save-ledger")
 	public ResponseEntity<Void> createLedger(@RequestBody Ledger ledger){
+		ledger.setUpdatedby("yusuf");
 		Ledger ledgerCreated =  ledgerRepository.save(ledger);
 		URI uri=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(ledgerCreated.getId()).toUri();
 		return ResponseEntity.created(uri).build();

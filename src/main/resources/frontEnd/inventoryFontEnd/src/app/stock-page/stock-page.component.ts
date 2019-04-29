@@ -29,8 +29,7 @@ export class StockPageComponent implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.stock = new Stock(this.id, '', '', 0, 0, new Date(), '', new Date(), 'yusuf1');
-    
-    
+     
     if (this.id != -1) {
       this.stockService.retriveStockById(this.id).subscribe(
         response => {
@@ -42,8 +41,6 @@ export class StockPageComponent implements OnInit {
       
     }
     this.selectedName = this.stock.productCategory;
-    console.log("stock.productCategory ===>"+this.stock.productCategory);
-    
     this.getAllCategory();
   }
 
@@ -60,8 +57,7 @@ export class StockPageComponent implements OnInit {
 
   saveStock() {
     this.stock.updatedBy = sessionStorage.getItem('authenticatedUser');
-    this.stock.modifiedDate = new Date();
-    console.log("HI HTER "+this.selectedName)
+    this.stock.modifiedDate = new Date(); 
     this.stock.productCategory =  this.selectedName;
     if (this.id != -1) {
       console.log();
@@ -89,38 +85,5 @@ console.log(this.stock.createdDate);
          }
       );
     }
-  }
-
-
-
-  ////////
-  // isSubmitted = false;
-  // City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
-  // registrationForm = this.fb.group({
-  //   cityName: ['', [Validators.required]]
-  // })
-  // // Choose city using select dropdown
-  // changeCity(e) {
-  //   console.log(e.value)
-  //   this.cityName.setValue(e.target.value, {
-  //     onlySelf: true
-  //   })
-  // }
-
-  // // Getter method to access formcontrols
-  // get cityName() {
-  //   return this.registrationForm.get('cityName');
-  // }
-
-  // /*########### Template Driven Form ###########*/
-  // onSubmit() {
-  //   this.isSubmitted = true;
-  //   if (!this.registrationForm.valid) {
-  //     return false;
-  //   } else {
-  //     alert(JSON.stringify(this.registrationForm.value))
-  //   }
-
-  // }
-  // //////////////////
+  } 
 }

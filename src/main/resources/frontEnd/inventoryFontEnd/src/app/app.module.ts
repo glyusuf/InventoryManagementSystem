@@ -20,6 +20,8 @@ import { CategoryPageComponent } from './category-page/category-page.component';
 import { StockPageComponent } from './stock-page/stock-page.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LedgerPageComponent } from './ledger-page/ledger-page.component';
+import { SellPageComponent } from './sell-page/sell-page.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ErrorComponent,
     ExpensePageComponent,
     CategoryPageComponent,
-    StockPageComponent
+    StockPageComponent,
+    LedgerPageComponent,
+    SellPageComponent
   ],
   imports: [
     BrowserModule,

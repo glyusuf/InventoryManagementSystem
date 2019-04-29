@@ -1,0 +1,34 @@
+<h1>Ledger Page</h1>
+ 
+<div class="container">
+  <fieldset class="form-group">
+    <label>Description</label>
+    <input type="text" [(ngModel)]="ledger.perticularDescription" class="form-control" name="perticularDescription"
+      required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Payment Type</label>
+    <input type="text" [(ngModel)]="ledger.paymentType" class="form-control" name="paymentType" required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Folio</label>
+    <input type="text" [(ngModel)]="ledger.folio" class="form-control" name="folio" required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Debit</label>
+    <input type="text" [(ngModel)]="ledger.debit" class="form-control" name="debit" required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Credit</label>
+    <input type="text" [(ngModel)]="ledger.credit" class="form-control" name="credit" required="required">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Due</label>
+    <input type="text" [(ngModel)]="ledger.due" class="form-control" name="due" required="required">
+  </fieldset>
+  <input type="hidden" [(ngModel)]="ledger.createdBy" class="form-control" name="createdBy" required="required">
+  <input type="hidden" [(ngModel)]="ledger.createdDate" class="form-control" name="createdDate" required="required">
+  <input type="hidden" [(ngModel)]="ledger.modifiedDate" class="form-control" name="modifiedDate" required="required">
+  <input type="hidden" [(ngModel)]="ledger.updatedby" class="form-control" name="updatedby" required="required">
+  <button class="btn btn-success" (click)="saveLedger()">Save</button>
+</div>

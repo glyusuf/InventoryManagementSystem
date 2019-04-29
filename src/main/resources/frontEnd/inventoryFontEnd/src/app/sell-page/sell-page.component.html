@@ -1,0 +1,58 @@
+<h1>Sell Page</h1>
+<div class="container-fluid">
+        <div class="row ">
+            <div class="row" *ngFor="let item of items">
+                <div class="col-md-3">
+                    <fieldset class="form-group">
+                        <label>Category</label>
+                        <select class="custom-select" (change)="selectCategory($event)"
+                            name="categoryProduct{{item.id}}" id="categoryProduct{{item.id}}">
+                            <option> Select a category</option>
+                            <option *ngFor="let c of categoryList" [ngValue]="c.categoryName">{{c.categoryName}}
+                            </option>
+                        </select>
+                    </fieldset>
+                </div>
+                <div class="col-md-3">
+                    <fieldset class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" class="form-control" name="productName{{item.id}}" required="required">
+                    </fieldset>
+                </div>
+                <div class="col-md-2">
+                    <fieldset class="form-group">
+                        <label>Quantity</label>
+                        <input type="text" class="form-control" name="quantity{{item.id}}" required="required">
+                    </fieldset>
+                </div>
+                <div class="form-group col-md-2">
+                    <fieldset class="form-group">
+                        <label>Price Per Unit</label>
+                        <input type="text" class="form-control" name="pricePerUnit{{item.id}}" required="required">
+                    </fieldset>
+                </div>
+                <div class="form-group col-md-2">
+                    <fieldset class="form-group">
+                        <label>Total</label>
+                        <input type="text" class="form-control" name="totalAmount{{item.id}}" required="required">
+                    </fieldset>
+
+                </div>
+            </div>
+            <button (click)="addNewItems()">Add Item</button>
+        </div>
+    <button (click)="setFormElements()">Print & Save Items</button>
+
+</div>
+
+<!-- <select (change)="selectCountry($event)" title="Select a country">
+    <option *ngFor="let country of categoryList">{{country.categoryName}} 
+    </option>
+</select> -->
+<!-- <div class="form-group" *ngFor="let choice of choices">
+    
+    <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Add Choice</button>
+      
+    <div>{{choice.id+"  "+choice.name}}</div>
+     <input type="text" ng-modal="{{choice.name}}" name="" placeholder="Enter a restaurant name" value="{{choice.id}}"> 
+</div> -->

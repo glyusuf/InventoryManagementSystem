@@ -1,3 +1,51 @@
-<p>
-  ledger works!
-</p>
+<h1> Ledger Page</h1>
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="row">
+  <div class="form-group">
+    <div class="input-group">
+      <button (click)="addLedger()" class="btn btn-success">Add new</button> &nbsp;&nbsp;&nbsp;
+      <input type="date" class="form-control" name="strDate1" [(ngModel)]="strDate1" (change)="setMarginalDate()"
+        placeholder="strDate1" />
+      <span class="input-group-addon">-</span>
+      <input type="date" class="form-control" name="endDate1" [(ngModel)]="endDate1" (change)="setMarginalDate()"
+        placeholder="endDate1" /> 
+    </div>
+
+  </div>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Perticular Description</th>
+        <th>paymentType</th>
+        <th>folio</th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th>Due</th>
+        <th>Created Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ledger of ledgerList">
+        <td>{{ledger.id}}</td>
+        <td>{{ledger.perticularDescription}}</td>
+        <td>{{ledger.paymentType}}</td>
+        <td>{{ledger.folio}}</td>
+        <td>{{ledger.debit}}</td>
+        <td>{{ledger.credit}}</td>
+        <td>{{ledger.due}}</td>
+        <td>{{ledger.createdDate | date}}</td>
+        <td><button (click)="editLedger(ledger.id)" class="btn btn-success">Edit</button></td>
+        <td><button (click)="deleteLedger(ledger.id)" class="btn btn-warning">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <ul class="nav nav-pills">
+    <li class="nav-item" *ngFor="let p of pages; let i=index">
+      <a class="nav-link active" href="" (click)='setPage(i,$event)'>{{i+1}}</a>
+    </li>
+  </ul>
+</div>
