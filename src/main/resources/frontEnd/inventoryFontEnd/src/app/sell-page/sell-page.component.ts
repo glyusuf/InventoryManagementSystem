@@ -1,43 +1,58 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CategoryService } from '../service/data/category.service';
 import { Category } from '../category/category.component';
-export class SellRow {
-  constructor(
-    public id: number,
-    public perticularDescription: string
-  ){}
-}
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { StockService } from '../service/data/stock.service';
+import { Stock } from '../stock/stock.component';
+
 @Component({
   selector: 'app-sell-page',
   templateUrl: './sell-page.component.html',
   styleUrls: ['./sell-page.component.css']
 })
-
 export class SellPageComponent implements OnInit {
-
-  categoryList: Category[]; 
-  
-  constructor(
+  myForm: FormGroup;
+  categoryList: Category[];
+   
+  constructor(private fb: FormBuilder,
     private categoryService: CategoryService,
-    private elRef:ElementRef
-  ) { }
- 
+    private stockService:StockService
+  ) {
+
+  }
+
   ngOnInit() {
+    this.myForm = this.fb.group({
+      folio: ['', Validators.required],
+      paymentType: ['',Validators.required],
+      products: this.fb.array([
+        this.addProductFromGroup()
+      ])
+    });
+
     this.getAllCategory();
   }
- 
-  items = [
-    {id:1}
-  ];
 
-  addNewItems(){
-    console.log("I is "+this.items.length+1);
-    let i:number =this.items.length+1;
-    console.log("I is "+i);
-    this.items.push({'id':i});
+  addProductFromGroup(): FormGroup{
+    return this.fb.group({
+      category: [''],
+      productName: [''],
+      quantity: [''],
+      pricePerUnit: [''],
+      total: [''], 
+    })
   }
-  
+  addProduct(){
+    (<FormArray>this.myForm.get('products')).push(this.addProductFromGroup());
+  }
+
+  onSubmit(): void {
+    console.log(this.myForm.controls.folio.value);
+    //console.log(this.myForm.get('products').controls.productName.value);
+  }
+
   getAllCategory() {
+    console.log("INSIDE CATEGORY");
     this.categoryService.retriveAllCategory().subscribe(
       data => {
         this.categoryList = data;
@@ -48,25 +63,59 @@ export class SellPageComponent implements OnInit {
     );
   }
 
-  setFormElements(){
-    console.log(document.getElementById('productName1'));
-    console.log("==>>"+this.elRef.nativeElement.querySelector('productName1'));
-    for (let i = 0; i < this.items.length; i++) {
-      let categoryProduct = document.getElementById('categoryProduct'+i) as HTMLElement; 
-      console.log(categoryProduct);
-    }
-  } 
-
-  selectCountry(event) {
-
-    let fireboxFix = event.target || event.srcElement;
-    let indexToFind = (<HTMLSelectElement>fireboxFix).value;
-    console.log("indexToFind "+indexToFind);
+  selectCategory(event, i) {  
+    const categoryControl = (<FormArray>this.myForm.controls['products']).at(0).get('category') as FormArray;
+    this.getProductfromStock(i,categoryControl.value); 
   }
 
-  selectCategory(event){
-    let category = event.target || event.srcElement;
-    let categoryValue = (<HTMLSelectElement>category).value;
-    console.log("indexToFind "+categoryValue);
+  getProductfromStock(i, catName):any  { 
+    let stockdata: Stock[]; 
+    let productnamesList: String[]= [];
+     
+    return this.stockService.retriveStockByCatName(catName).subscribe(
+      data => {
+        stockdata = data; 
+
+        for(let stock of stockdata){
+          console.log("product Name "+stock.productName);
+          productnamesList.push(stock.productName);
+        }
+        console.log("PRODUCT NAME LIST "+productnamesList);
+         
+        let str = "productName"+i; 
+        let select = document.getElementById(str) as HTMLElement
+         
+        for(let stock  of stockdata) {
+            select.options[select.options.length] = new Option(stock.productName, stock.productName);
+        }
+      }
+    );
+  }
+
+  selectProduct(event, i) {  
+    const categoryControl = (<FormArray>this.myForm.controls['products']).at(0).get('category') as FormArray;
+    const productNameControl = (<FormArray>this.myForm.controls['products']).at(0).get('productName') as FormArray;
+    
+    this.getdatafromStock(i,categoryControl.value, productNameControl.value);  
+  }
+
+  getdatafromStock(i,cName, pName){
+    let stockdata : Stock;
+    let qtyStr = "quantity"+i;
+    let priceStr = "pricePerUnit"+i;
+    let selectquantity = document.getElementById(qtyStr) as HTMLElement;
+    let selectprice = document.getElementById(priceStr) as HTMLElement
+         
+    return this.stockService.retriveStockByCatNameAndProductName(cName,pName).subscribe(
+      data => {
+        stockdata = data; 
+        console.log("data.quantity "+data.quantity);
+        //selectquantity.innerHTML = data.quantity.toString;
+        const categoryControl = (<FormArray>this.myForm.controls['products']).at(0).get('quantity') as FormArray;
+        
+        selectquantity.value = data.quantity+"";
+        console.log("data.quantity "+selectquantity.value);
+      }
+    );
   }
 }

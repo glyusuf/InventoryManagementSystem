@@ -34,4 +34,14 @@ export class StockService {
   retriveStockById(id){
     return this.http.get<Stock>(this.baseUrl+`/stocks/${id}`);
   }
+
+  retriveStockByCatName(catName){
+    console.log("URL --->> "+this.baseUrl+`/stocksbycatname/get?productCategory=${catName}`)
+    return this.http.get<Stock[]>(this.baseUrl+`/stocksbycatname/get?productCategory=${catName}`);
+  }
+
+  retriveStockByCatNameAndProductName(catName, pname){
+    console.log("URL --->> "+this.baseUrl+`/stocksbycatnameAndPname/get?productCategory=${catName}&productName=${pname}`)
+    return this.http.get<Stock>(this.baseUrl+`/stocksbycatnameAndPname/get?productCategory=${catName}&productName=${pname}`);
+  }
 }

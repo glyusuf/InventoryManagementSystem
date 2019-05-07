@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -46,8 +47,7 @@ public class StockController {
 		Page<Stock> resultPage = stockRepository.findAllStocksPagination(PageRequest.of(page, size));
 		if (page > resultPage.getTotalPages()) {
 			System.out.println("Resource Not Found");
-		}
-		
+		} 
 		return resultPage;
 	}
 	
@@ -55,6 +55,21 @@ public class StockController {
 	public Stock getstock(@PathVariable Long id) {
 		return stockRepository.findById(id);
 	}
+	
+	@RequestMapping(value = "/stocksbycatname/get", params = { "productCategory"}, method = RequestMethod.GET)
+	public List<Stock> getstockByCategory(@RequestParam String productCategory) {
+		List<Stock> s = stockRepository.findAllByCategoryName(productCategory);
+		System.out.println("STOCK SIZE "+s.size());
+		return (List<Stock>) stockRepository.findAllByCategoryName(productCategory);
+	}
+	
+	@RequestMapping(value = "/stocksbycatnameAndPname/get", params = { "productCategory", "productName"}, method = RequestMethod.GET)
+	public Stock getstockByCategoryAndProductName(@RequestParam String productCategory, @RequestParam String productName) {
+		Stock stock = stockRepository.findAllByCategoryNameAndProductName(productCategory, productName);
+		System.out.println("STOCK SIZE "+stock.getProductName()+"  "+stock.getQuantity());
+		return stock;
+	}
+	
 
 	@PostMapping("/save-stocks")
 	public ResponseEntity<Void> createStock(@RequestBody Stock stock) {

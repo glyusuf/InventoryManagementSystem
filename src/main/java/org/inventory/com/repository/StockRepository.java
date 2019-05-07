@@ -20,5 +20,11 @@ public interface StockRepository extends PagingAndSortingRepository<Stock, Integ
 	
 	@Query(value = "select * from stock e",nativeQuery = true) 
     Page<Stock> findAllStocksPagination(Pageable pageable);
-
+  
+	@Query(value = "select * from stock s where s.category_name= ?1",nativeQuery = true)
+	List<Stock> findAllByCategoryName(String category_name);
+	
+	@Query(value = "select * from stock s where s.category_name= ?1 AND s.product_name=?2",nativeQuery = true)
+	Stock findAllByCategoryNameAndProductName(String category_name, String productName);
+	  
 }

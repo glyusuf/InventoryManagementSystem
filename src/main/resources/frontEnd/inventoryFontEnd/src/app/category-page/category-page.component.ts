@@ -30,7 +30,6 @@ export class CategoryPageComponent implements OnInit {
   }
 
   saveCategory(){
-
     this.category.updatedBy = sessionStorage.getItem('authenticatedUser');
     this.category.modifiedDate = new Date();
     

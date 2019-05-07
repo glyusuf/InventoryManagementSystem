@@ -22,7 +22,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LedgerPageComponent } from './ledger-page/ledger-page.component';
 import { SellPageComponent } from './sell-page/sell-page.component';
-
+   
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +40,7 @@ import { SellPageComponent } from './sell-page/sell-page.component';
     CategoryPageComponent,
     StockPageComponent,
     LedgerPageComponent,
-    SellPageComponent
+    SellPageComponent, 
   ],
   imports: [
     BrowserModule,

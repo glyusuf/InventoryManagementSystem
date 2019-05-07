@@ -38,7 +38,6 @@ export class StockPageComponent implements OnInit {
           console.log(response);
         }
       );
-      
     }
     this.selectedName = this.stock.productCategory;
     this.getAllCategory();
@@ -71,13 +70,13 @@ export class StockPageComponent implements OnInit {
     } else {
       this.stock.createdBy = sessionStorage.getItem('authenticatedUser');
       this.stock.createdDate = new Date();
-console.log(this.stock.id);
-console.log(this.stock.productName);
-console.log(this.stock.productCategory +" ---- "+this.selectedName) ;
-console.log(this.stock.updatedBy);
-console.log(this.stock.modifiedDate);
-console.log(this.stock.createdBy);
-console.log(this.stock.createdDate);
+      console.log(this.stock.id);
+      console.log(this.stock.productName);
+      console.log(this.stock.productCategory +" ---- "+this.selectedName) ;
+      console.log(this.stock.updatedBy);
+      console.log(this.stock.modifiedDate);
+      console.log(this.stock.createdBy);
+      console.log(this.stock.createdDate);
       this.stockService.addStock(this.stock).subscribe(
          response => {
            console.log(response)

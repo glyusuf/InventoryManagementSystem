@@ -1,58 +1,91 @@
-<h1>Sell Page</h1>
+<!-- <h1>Sell Page</h1>
 <div class="container-fluid">
+        <form [formGroup]="myForm"> 
+                Value: {{ myForm.value | json }} 
+                <hr> 
         <div class="row ">
-            <div class="row" *ngFor="let item of items">
+            <div class="row"  *ngFor="let product of productForms.controls; let i=index" [formGroupName]="i"> 
                 <div class="col-md-3">
-                    <fieldset class="form-group">
-                        <label>Category</label>
-                        <select class="custom-select" (change)="selectCategory($event)"
-                            name="categoryProduct{{item.id}}" id="categoryProduct{{item.id}}">
-                            <option> Select a category</option>
-                            <option *ngFor="let c of categoryList" [ngValue]="c.categoryName">{{c.categoryName}}
-                            </option>
-                        </select>
+                    <fieldset class="form-group"> 
+                            <select class="custom-select"  placeholder="Select a category" (change)="selectCategory($event)">
+                                 <option *ngFor="let c of categoryList" [ngValue]="c.categoryName">{{c.categoryName}}
+                                </option>
+                            </select>
                     </fieldset>
                 </div>
                 <div class="col-md-3">
-                    <fieldset class="form-group">
-                        <label>Product Name</label>
-                        <input type="text" class="form-control" name="productName{{item.id}}" required="required">
+                    <fieldset class="form-group"> 
+                        <input matInput  class="form-control" placeholder="Product Name" formControlName="productName">
                     </fieldset>
                 </div>
                 <div class="col-md-2">
-                    <fieldset class="form-group">
-                        <label>Quantity</label>
-                        <input type="text" class="form-control" name="quantity{{item.id}}" required="required">
+                    <fieldset class="form-group"> 
+                            <input matInput  class="form-control" placeholder="Quantity" formControlName="quantity">
                     </fieldset>
                 </div>
                 <div class="form-group col-md-2">
                     <fieldset class="form-group">
-                        <label>Price Per Unit</label>
-                        <input type="text" class="form-control" name="pricePerUnit{{item.id}}" required="required">
+                        <input class="form-control" matInput placeholder="Price Per Unit" formControlName="pricePerUnit">
                     </fieldset>
                 </div>
                 <div class="form-group col-md-2">
-                    <fieldset class="form-group">
-                        <label>Total</label>
-                        <input type="text" class="form-control" name="totalAmount{{item.id}}" required="required">
-                    </fieldset>
-
+                    <fieldset class="form-group"> 
+                        <input matInput class="form-control" placeholder="Total" formControlName="total"> 
+                    </fieldset> 
                 </div>
-            </div>
-            <button (click)="addNewItems()">Add Item</button>
+            </div>  
+            <button (click)="addProduct()">Add Item</button>
         </div>
     <button (click)="setFormElements()">Print & Save Items</button>
+        </form>
+</div>   -->
 
+<h1>Sell Page</h1>
+<div class="container-fluid">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        Value: {{ myForm.value | json }}
+        <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <select class="custom-select" placeholder="Select a Payment Type" formControlName="paymentType">
+                    <option value="0" selected>Full payment</option>
+                    <option value="1">Installment</option>
+                </select>
+
+            </div>
+            <div class="col-md-2">
+                <input matInput placeholder="Folio" formControlName="folio">
+            </div>
+        </div>
+        <div class="row" formArrayName="products" *ngFor="let product of this.myForm.get('products').controls; let i=index">
+            <div class="row" [formGroupName]="i">
+                <div class="col-md-2">
+                    <select class="custom-select" id="{{'category'+i}}" formControlName="category" (change)="selectCategory($event, i)">
+                        <option value="0" selected>Select a category</option>
+                        <option *ngFor="let c of categoryList" [ngValue]="c.categoryName">{{c.categoryName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <!-- <input matInput placeholder="Product Name" id="{{'productName'+i}}" formControlName="productName" id="productName{{i}}"> -->
+                    <select class="custom-select" id="{{'productName'+i}}" formControlName="productName" (change)="selectProduct($event, i)">
+                        <option value="0" selected>Select a Product</option>
+                        <!-- <option *ngFor="let pname of this.myForm.get('products').controls.get('productNameList').controls" [ngValue]="pname">{{pname}} 
+                        </option>-->
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input matInput placeholder="Quantity" id="{{'quantity'+i}}" formControlName="quantity">
+                </div>
+                <div class="col-md-2">
+                    <input matInput placeholder="Price Per Unit" id="{{'pricePerUnit'+i}}" formControlName="pricePerUnit">
+                </div>
+                <div class="col-md-2">
+                    <input matInput placeholder="Total" id="{{'total'+i}}" formControlName="total">
+                </div>
+            </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="addProduct()">Add Product</button>
+        <button class="btn btn-primary" type="submit">Print & Save Items</button>
+    </form>
 </div>
-
-<!-- <select (change)="selectCountry($event)" title="Select a country">
-    <option *ngFor="let country of categoryList">{{country.categoryName}} 
-    </option>
-</select> -->
-<!-- <div class="form-group" *ngFor="let choice of choices">
-    
-    <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Add Choice</button>
-      
-    <div>{{choice.id+"  "+choice.name}}</div>
-     <input type="text" ng-modal="{{choice.name}}" name="" placeholder="Enter a restaurant name" value="{{choice.id}}"> 
-</div> -->
