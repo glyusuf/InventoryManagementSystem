@@ -67,4 +67,14 @@ export class StockComponent implements OnInit {
     this.stockService.deleteStock(id);
   }
  
+  setPage(i, event: any) {
+    event.preventDefault();
+    this.page = i;
+    this.getAllStock();
+  }
+
+  setMarginalDate() {
+    this.getAllStock();
+  }
+
 }

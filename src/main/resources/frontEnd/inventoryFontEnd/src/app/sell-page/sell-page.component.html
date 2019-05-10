@@ -42,7 +42,7 @@
 
 <h1>Sell Page</h1>
 <div class="container-fluid">
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="myForm" >
         Value: {{ myForm.value | json }}
         <hr>
         <div class="row">
@@ -66,26 +66,23 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <!-- <input matInput placeholder="Product Name" id="{{'productName'+i}}" formControlName="productName" id="productName{{i}}"> -->
+                <div class="col-md-2"> 
                     <select class="custom-select" id="{{'productName'+i}}" formControlName="productName" (change)="selectProduct($event, i)">
-                        <option value="0" selected>Select a Product</option>
-                        <!-- <option *ngFor="let pname of this.myForm.get('products').controls.get('productNameList').controls" [ngValue]="pname">{{pname}} 
-                        </option>-->
+                        <option value="0" selected>Select a Product</option> 
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <input matInput placeholder="Quantity" id="{{'quantity'+i}}" formControlName="quantity">
+                    <input matInput placeholder="Quantity" formControlName="quantity" (change)="selectQuantity($event, i)">
                 </div>
                 <div class="col-md-2">
-                    <input matInput placeholder="Price Per Unit" id="{{'pricePerUnit'+i}}" formControlName="pricePerUnit">
+                    <input matInput placeholder="Price Per Unit" formControlName="pricePerUnit" (change)="selectPrice($event, i)">
                 </div>
                 <div class="col-md-2">
-                    <input matInput placeholder="Total" id="{{'total'+i}}" formControlName="total">
+                    <input matInput placeholder="Total"  formControlName="total">
                 </div>
             </div>
         </div>
         <button mat-raised-button color="primary" (click)="addProduct()">Add Product</button>
-        <button class="btn btn-primary" type="submit">Print & Save Items</button>
+        <button class="btn btn-primary" type="submit" (click)="onSubmit()">Print & Save Items</button>
     </form>
 </div>
