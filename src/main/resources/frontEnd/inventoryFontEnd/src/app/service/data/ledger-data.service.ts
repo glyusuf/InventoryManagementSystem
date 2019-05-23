@@ -18,8 +18,8 @@ export class LedgerDataService {
     return this.http.get<Ledger[]>(this.baseUrl+'/ledgerbydate/get?page='+page+'&size=2&strDate='+formattedStrDate+'&endDate='+formattedEndDate);
   }
    
-  addLedger(stock){
-    return this.http.post(this.baseUrl+'/save-ledger',stock);
+  addLedger(ledger){
+    return this.http.post(this.baseUrl+'/save-ledger',ledger);
   }
 
   editLedger(id, stock){ 
@@ -34,4 +34,6 @@ export class LedgerDataService {
   retriveLedgerById(id){
     return this.http.get<Ledger>(this.baseUrl+`/ledger/${id}`);
   }
+
+
 }

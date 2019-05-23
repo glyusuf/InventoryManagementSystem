@@ -44,4 +44,10 @@ export class StockService {
     console.log("URL --->> "+this.baseUrl+`/stocksbycatnameAndPname/get?productCategory=${catName}&productName=${pname}`)
     return this.http.get<Stock>(this.baseUrl+`/stocksbycatnameAndPname/get?productCategory=${catName}&productName=${pname}`);
   }
+
+  updateStockByCategoryAndProductName(stockList){  
+    console.log("-->> UPDATE STOCK"+this.baseUrl+'/update-stock');
+    //return this.http.get<Stock>(this.baseUrl+`/update-stock/get?productCategory=${catName}&productName=${pname}`);
+    return this.http.post(this.baseUrl+'/update-stock',stockList);
+  }
 }

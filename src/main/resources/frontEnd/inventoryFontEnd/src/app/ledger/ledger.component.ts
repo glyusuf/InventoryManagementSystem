@@ -6,6 +6,9 @@ import { formatDate } from '@angular/common';
 export class Ledger {
   constructor(
     public id: number,
+    public customerName: string,
+    public customerPhone: string,
+    public customerAddress: string,
     public perticularDescription: string,
     public paymentType: string,
     public folio: string,

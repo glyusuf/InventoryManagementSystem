@@ -26,6 +26,17 @@ public class Ledger extends MandatoryDates{
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "LEDGER_SEQUENCE_GENERATOR")
     private Long id;
     
+
+    @Column(name = "CUSTOMER_NAME", nullable = false)
+	private String customerName;
+    
+
+    @Column(name = "CUSTOMER_PHONE", nullable = false)
+	private String customerPhone;
+
+    @Column(name = "customer_Address", nullable = false)
+	private String customerAddress;
+    
     @Column(name = "PERTICULAR_DESCRIPTION", nullable = false)
 	private String perticularDescription;
 
@@ -48,11 +59,15 @@ public class Ledger extends MandatoryDates{
 	public Ledger() {
 		super();
 	}
-
-	public Ledger(Long id, String perticularDescription, String paymentType, String folio, BigDecimal debit,
-			BigDecimal credit, BigDecimal due) {
+	
+	public Ledger(Long id, String customerName, String customerPhone, String customerAddress,
+			String perticularDescription, String paymentType, String folio, BigDecimal debit, BigDecimal credit,
+			BigDecimal due) {
 		super();
 		this.id = id;
+		this.customerName = customerName;
+		this.customerPhone = customerPhone;
+		this.customerAddress = customerAddress;
 		this.perticularDescription = perticularDescription;
 		this.paymentType = paymentType;
 		this.folio = folio;
@@ -60,7 +75,7 @@ public class Ledger extends MandatoryDates{
 		this.credit = credit;
 		this.due = due;
 	}
-
+ 
 	public Long getId() {
 		return id;
 	}
@@ -117,10 +132,36 @@ public class Ledger extends MandatoryDates{
 		this.paymentType = paymentType;
 	}
 
-	@Override
-	public String toString() {
-		return "Ledger [id=" + id + ", perticularDescription=" + perticularDescription + ", paymentType=" + paymentType
-				+ ", folio=" + folio + ", debit=" + debit + ", credit=" + credit + ", due=" + due + "]";
+	public String getCustomerName() {
+		return customerName;
 	}
 
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getCustomerPhone() {
+		return customerPhone;
+	}
+
+	public void setCustomerPhone(String customerPhone) {
+		this.customerPhone = customerPhone;
+	}
+
+	public String getCustomerAddress() {
+		return customerAddress;
+	}
+
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
+	}
+
+	@Override
+	public String toString() {
+		return "Ledger [id=" + id + ", customerName=" + customerName + ", customerPhone=" + customerPhone
+				+ ", customerAddress=" + customerAddress + ", perticularDescription=" + perticularDescription
+				+ ", paymentType=" + paymentType + ", folio=" + folio + ", debit=" + debit + ", credit=" + credit
+				+ ", due=" + due + "]";
+	} 
+	
 }

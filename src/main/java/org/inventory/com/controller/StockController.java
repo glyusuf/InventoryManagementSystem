@@ -58,15 +58,13 @@ public class StockController {
 	
 	@RequestMapping(value = "/stocksbycatname/get", params = { "productCategory"}, method = RequestMethod.GET)
 	public List<Stock> getstockByCategory(@RequestParam String productCategory) {
-		List<Stock> s = stockRepository.findAllByCategoryName(productCategory);
-		System.out.println("STOCK SIZE "+s.size());
+		List<Stock> s = stockRepository.findAllByCategoryName(productCategory); 
 		return (List<Stock>) stockRepository.findAllByCategoryName(productCategory);
 	}
 	
 	@RequestMapping(value = "/stocksbycatnameAndPname/get", params = { "productCategory", "productName"}, method = RequestMethod.GET)
 	public Stock getstockByCategoryAndProductName(@RequestParam String productCategory, @RequestParam String productName) {
-		Stock stock = stockRepository.findAllByCategoryNameAndProductName(productCategory, productName);
-		System.out.println("STOCK SIZE "+stock.getProductName()+"  "+stock.getQuantity());
+		Stock stock = stockRepository.findAllByCategoryNameAndProductName(productCategory, productName); 
 		return stock;
 	}
 	
@@ -86,7 +84,17 @@ public class StockController {
 		Stock stockUpdated = stockRepository.save(stock);
 		return new ResponseEntity<Stock>(stock, HttpStatus.OK);
 	}
-
+ 
+	@PostMapping("/update-stock")  
+	public void updatestockByCategoryAndProductName(@RequestBody Stock[] stock) {
+		System.out.println("UPDTATE STOCK HFD"+stock.length);
+		for(Stock s : stock) {
+			Stock stockToUpdate = stockRepository.findAllByCategoryNameAndProductName(s.getProductCategory(), s.getProductName());
+			stockToUpdate.setQuantity(stockToUpdate.getQuantity() - s.getQuantity());
+			Stock stockUpdated = stockRepository.save(stockToUpdate); 
+		}
+	}
+	
 	@GetMapping("/delete-stocks/{id}")
 	public void deleteStock(@PathVariable(value = "id") Long id) throws Exception {
 		Stock stock = stockRepository.findById(id);

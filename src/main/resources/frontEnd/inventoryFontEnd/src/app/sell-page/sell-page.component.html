@@ -1,50 +1,19 @@
-<!-- <h1>Sell Page</h1>
-<div class="container-fluid">
-        <form [formGroup]="myForm"> 
-                Value: {{ myForm.value | json }} 
-                <hr> 
-        <div class="row ">
-            <div class="row"  *ngFor="let product of productForms.controls; let i=index" [formGroupName]="i"> 
-                <div class="col-md-3">
-                    <fieldset class="form-group"> 
-                            <select class="custom-select"  placeholder="Select a category" (change)="selectCategory($event)">
-                                 <option *ngFor="let c of categoryList" [ngValue]="c.categoryName">{{c.categoryName}}
-                                </option>
-                            </select>
-                    </fieldset>
-                </div>
-                <div class="col-md-3">
-                    <fieldset class="form-group"> 
-                        <input matInput  class="form-control" placeholder="Product Name" formControlName="productName">
-                    </fieldset>
-                </div>
-                <div class="col-md-2">
-                    <fieldset class="form-group"> 
-                            <input matInput  class="form-control" placeholder="Quantity" formControlName="quantity">
-                    </fieldset>
-                </div>
-                <div class="form-group col-md-2">
-                    <fieldset class="form-group">
-                        <input class="form-control" matInput placeholder="Price Per Unit" formControlName="pricePerUnit">
-                    </fieldset>
-                </div>
-                <div class="form-group col-md-2">
-                    <fieldset class="form-group"> 
-                        <input matInput class="form-control" placeholder="Total" formControlName="total"> 
-                    </fieldset> 
-                </div>
-            </div>  
-            <button (click)="addProduct()">Add Item</button>
-        </div>
-    <button (click)="setFormElements()">Print & Save Items</button>
-        </form>
-</div>   -->
-
-<h1>Sell Page</h1>
+ <h1>Sell Page</h1>
 <div class="container-fluid">
     <form [formGroup]="myForm" >
         Value: {{ myForm.value | json }}
         <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <input matInput placeholder="Customer Name" formControlName="customerName">
+            </div>
+            <div class="col-md-2">
+                <input matInput placeholder="Customer Mobile No." formControlName="customerPhone">
+            </div>
+            <div class="col-md-2">
+                <input matInput placeholder="Customer Address" formControlName="customerAddress">
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-2">
                 <select class="custom-select" placeholder="Select a Payment Type" formControlName="paymentType">
@@ -55,6 +24,15 @@
             </div>
             <div class="col-md-2">
                 <input matInput placeholder="Folio" formControlName="folio">
+            </div>
+            <div class="col-md-2">
+                <input matInput placeholder="Debit" formControlName="debit">
+            </div>
+            <div class="col-md-2">
+                <input matInput placeholder="Credit" formControlName="credit">
+            </div>
+            <div class="col-md-2">
+                <input matInput placeholder="Grand Total" formControlName="grandTotal">
             </div>
         </div>
         <div class="row" formArrayName="products" *ngFor="let product of this.myForm.get('products').controls; let i=index">
@@ -78,7 +56,7 @@
                     <input matInput placeholder="Price Per Unit" formControlName="pricePerUnit" (change)="selectPrice($event, i)">
                 </div>
                 <div class="col-md-2">
-                    <input matInput placeholder="Total"  formControlName="total">
+                    <input matInput placeholder="Total" (ngModelChange)="TotalChanged()" formControlName="total">
                 </div>
             </div>
         </div>

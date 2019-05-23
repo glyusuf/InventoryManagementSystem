@@ -20,7 +20,7 @@ export class LedgerPageComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.ledger = new Ledger(this.id, '','','', 0,0,0, new Date(), '', new Date(), 'yusuf1');
+    this.ledger = new Ledger(this.id, '','','','','','', 0,0,0, new Date(), '', new Date(), 'yusuf1');
    
     if (this.id != -1) {
       this.ledgerDataService.retriveLedgerById(this.id).subscribe(
